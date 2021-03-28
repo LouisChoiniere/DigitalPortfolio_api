@@ -14,6 +14,9 @@ const meSchema: Schema = new Schema({
     dateOfBirth: { type: Date, required: true },
     about: { type: String, required: true },
     links: { type: Array, required: true },
-}, { collection: 'me' });
+}, {
+    collection: 'me',
+    versionKey: false
+})
 
 export default mongoose.model<IMe>('Me', meSchema);

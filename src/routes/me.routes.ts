@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import Blog, { IBlog } from '../models/blog.model';
+import Contact, {IContact} from '../models/contact.model';
 import Experience, { IExperience } from '../models/experience.model';
 import Me, { IMe } from '../models/me.model';
 import Project, { IProject } from '../models/project.model';
@@ -6,7 +8,8 @@ import Project, { IProject } from '../models/project.model';
 const router = Router();
 
 router.get('/info', async (req, res) => {
-    const me: IMe = await Me.find({}, "-_id");
+    const me: IMe = await Me
+        .find({}, "-_id");
     res.send(me[0]);
 });
 
@@ -23,5 +26,27 @@ router.get('/experience', async (req, res) => {
         .sort({ displayOrder: 1 });
     res.send(experience);
 });
+
+router.get('/blog', async (req, res) => {
+    const blog: IBlog[] = await Blog
+        .find({}, "-_id");
+    res.send(blog);
+});
+
+router.post('/contact', async (req, res) => {
+    const contact = new Contact(req.body);
+
+    console.log(contact);
+
+    contact.save()
+        .then(result => {
+            console.log(result);
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+
+})
 
 export default router;

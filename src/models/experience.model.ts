@@ -24,6 +24,9 @@ const experienceSchema: Schema = new Schema({
         end: { type: String, required: true },
     },
     displayOrder: { type: String, required: true },
-}, { collection: 'experience'})
+}, {
+    collection: 'experience',
+    versionKey: false
+})
 
 export default mongoose.model<IExperience>('Experience', experienceSchema)

@@ -15,7 +15,8 @@ const projectSchema: Schema = new Schema({
     date: { type: String, required: true },
     displayOrder: { type: Number, required: true },
 }, {
-    collection: 'project'
-});
+    collection: 'project',
+    versionKey: false
+})
 
 export default mongoose.model<IProject>('Project', projectSchema);
