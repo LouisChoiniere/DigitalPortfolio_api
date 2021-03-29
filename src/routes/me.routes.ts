@@ -36,8 +36,6 @@ router.get('/blog', async (req, res) => {
 router.post('/contact', async (req, res) => {
     const contact = new Contact(req.body);
 
-    console.log(contact);
-
     contact.save()
         .then(result => {
             console.log(result);
