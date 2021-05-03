@@ -38,13 +38,11 @@ router.post('/contact', async (req, res) => {
 
     contact.save()
         .then(result => {
-            console.log(result);
             res.sendStatus(201);
         }).catch(err => {
             console.log(err);
             res.sendStatus(500);
-        })
-
+        });
 })
 
 export default router;
