@@ -7,6 +7,6 @@ const routes = Router();
 
 routes.use('/', homeRouter);
 routes.use('/me', meRouter);
-routes.use('/admin', adminRouter)
+// routes.use('/admin', adminRouter)
 
 export default routes;

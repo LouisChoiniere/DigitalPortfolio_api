@@ -29,6 +29,7 @@ router.put('/', async (req, res) => {
         const project = new ProjectModel(req.body);
         project.save()
             .then(result => {
+                console.log(result);
                 res.sendStatus(201);
             }).catch(err => {
                 console.log(err);

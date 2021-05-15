@@ -13,6 +13,7 @@ const projectSchema: Schema = new Schema({
     description: { type: String, required: true },
     links: { type: Array, required: false },
     date: { type: String, required: true },
+    goal: { type: String, required: true },
     displayOrder: { type: Number, required: true },
 }, {
     collection: 'project',
