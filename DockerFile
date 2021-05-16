@@ -1,7 +1,6 @@
 FROM node:14.15.4
 WORKDIR /app
-COPY package.json /app
+COPY . /app
 RUN npm install
 RUN npm build
-COPY /dist /app
 CMD ["npm", "start"]
