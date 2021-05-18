@@ -8,6 +8,9 @@ class Authentification {
 
     static isValid(token) {
 
+        if(!token)
+            return false;
+
         if (token.substring(7) == this._token)
             return true;
 
