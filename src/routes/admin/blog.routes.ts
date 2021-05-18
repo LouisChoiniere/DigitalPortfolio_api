@@ -1,9 +1,13 @@
 import { Router } from "express";
 import BlogModel, { IBlog } from "../../models/blog.model";
+import Auth from './../../auth/auth'
 
 const router = Router();
 
 router.get('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     const blog: IBlog[] = await BlogModel
         .find();
 
@@ -11,6 +15,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     const blog = new BlogModel(req.body);
 
     blog.save()
@@ -23,6 +30,9 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     if (req.query.id == null) {
         return res.sendStatus(400);
     }

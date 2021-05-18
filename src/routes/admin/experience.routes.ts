@@ -1,9 +1,13 @@
 import { Router } from "express";
 import ExperienceModel, { IExperience } from "../../models/experience.model";
+import Auth from './../../auth/auth'
 
 const router = Router();
 
 router.get('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     const experiences: IExperience[] = await ExperienceModel
         .find()
         .sort({ displayOrder: 1 });
@@ -12,6 +16,9 @@ router.get('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     if (req.body == null) {
         return res.sendStatus(400);
     }
@@ -39,6 +46,9 @@ router.put('/', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
+    if (!Auth.isValid(req.headers.authorization))
+        return res.sendStatus(403);
+
     if (req.query.id == null) {
         return res.sendStatus(400);
     }
